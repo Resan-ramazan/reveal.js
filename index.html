@@ -1,40 +1,347 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en">
-	<head>
-		<meta charset="utf-8">
-		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <head>
+    <meta charset="utf-8" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"
+    />
 
-		<title>reveal.js</title>
+    <title>reveal.js</title>
 
-		<link rel="stylesheet" href="dist/reset.css">
-		<link rel="stylesheet" href="dist/reveal.css">
-		<link rel="stylesheet" href="dist/theme/black.css">
+    <link rel="stylesheet" href="dist/reset.css" />
+    <link rel="stylesheet" href="dist/reveal.css" />
+    <link rel="stylesheet" href="dist/theme/black.css" />
 
-		<!-- Theme used for syntax highlighted code -->
-		<link rel="stylesheet" href="plugin/highlight/monokai.css">
-	</head>
-	<body>
-		<div class="reveal">
-			<div class="slides">
-				<section>Slide 1</section>
-				<section>Slide 2</section>
-			</div>
-		</div>
+    <!-- Theme used for syntax highlighted code -->
+    <link rel="stylesheet" href="plugin/highlight/monokai.css" />
+  </head>
+  <body>
+    <div class="reveal">
+      <div class="slides">
+        <!-- Slide1  -->
+        <section>
+          <div>
+            <h1 style="color: orange;">Good Code</h1>
+            <p>
+              Today, we are examining the prime number finding project from the
+              first year.
+            </p>
+          </div>
+        </section>
+        <!-- Slide2  -->
+        <section>
+          <section>
+            <div>
+              <h3 style="color: orange;">About this Presentation</h3>
+              <ul>
+                <li>Examining the prime number finding project</li>
+                <li>Find potential coding issue</li>
+                <li>Find out Where clean code principles were not followed</li>
+              </ul>
+            </div>
+          </section>
+          <section>
+            <h2>Proje Topic</h2>
+            <p><em>Prime Number Program</em></p>
+            <br />
+            <a href="#/2/1" class="navigate-down">
+              <img
+                class="r-frame"
+                style="background: rgba(255, 255, 255, 0.1)"
+                width="178"
+                height="238"
+                data-src="https://static.slid.es/reveal/arrow.png"
+                alt="Down arrow"
+              />
+            </a>
+          </section>
+          <section data-auto-animate>
+            <h2 data-id="code-title">Source Code</h2>
+            <pre
+              data-id="code-animation"
+            ><code class="hljs javascript" data-trim data-line-numbers="|4,8-11|17|22-24"><script type="text/template">
+					class Program
+					{
+						static void Main(string[] args)
+						{
+				
+							int input, counter, kontrol, prime;
+							long[] series = new long[99999];
+							int mycounter = -1;
+							Console.WriteLine("Prime Number Programs ");
+							Console.Write("enter a number ");
+							input = Convert.ToInt32(Console.ReadLine());
+				
+							for (kontrol = 2; kontrol <= input; kontrol++)
+							{
+								prime = 1;
+								for (counter = 2; counter < kontrol; counter++)
+								{
+									if (kontrol % counter == 0)
+									{
+										prime = 0;
+									}
+								}
+								if (prime == 0)
+								{
+				
+								}
+								else
+								{
+				
+									mycounter++;
+									series[mycounter] = kontrol;
+								}
+							}
+							for (int i = 0; i <= mycounter; i++)
+							{
+								Console.WriteLine(series[i]);
+							}
+						}
+					}
+				</script></code></pre>
+          </section>
+          <section>
+            <h2>Let's find some issue about that code</h2>
+            <p>That's it, time to go back up.</p>
+            <br />
+            <a href="#/2">
+              <img
+                class="r-frame"
+                style="
+                  background: rgba(255, 255, 255, 0.1);
+                  transform: rotate(180deg);
+                "
+                width="178"
+                height="238"
+                data-src="https://static.slid.es/reveal/arrow.png"
+                alt="Up arrow"
+              />
+            </a>
+          </section>
+        </section>
+		<!-- Slide3  -->
+        <section>
+          <section>
+            <h3 data-id="code-title" style="color:springgreen;">Issue 1</h3>
+            <p>Variable names are not meaningful</p>
+            <p>For example: kontrol, prime, mycounter</p>
+            <p style="color: orange">
+              <em
+                >Variables like counter, kontrol, and mycounter could have more
+                descriptive names.</em
+              >
+            </p>
+            <pre
+              data-id="code-animation"
+            ><code class="hljs javascript" data-trim data-line-numbers="|4,8-11|17|22-24"><script type="text/template">
+					class Program
+					{
+						static void Main(string[] args)
+						{
+							
+							int input, counter, kontrol, prime;
+							long[] series = new long[99999];
+							int mycounter = -1;
+							
+						}
+					</script></code></pre>
+            <a href="#/3/1" class="navigate-down"></a>
+          </section>
+          <!-- Slide1  -->
+          <section>
+            <h3 style="color:springgreen;">For Example</h3>
+            <p>
+              Consider using
+              <em>candidate</em>,<em>primeSeries</em>,<em>limit</em>, and
+              <em>primeCount</em> respectively. This makes the code more
+              readable and self-explanatory.
+            </p>
+            <pre
+              data-id="code-animation"
+            ><code class="hljs javascript" data-trim data-line-numbers="|4,8-11|17|22-24"><script type="text/template">
+							class Program
+							{
+								static void Main(string[] args)
+								{
+									int userInput, counter, candidate, prime;
+									long[] primeSeries = new long[99999];
+									int primeCount = -1;
+									
+									
+								}
+							</script></code></pre>
+            <a href="#/3/2" class="navigate-down"></a>
+          </section>
+          <section>
+            <h3 data-id="code-title" style="color:springgreen;">Issue 2</h3>
+            <p>Unused Code</p>
+            <p>
+              The block inside the if (prime == 0) condition is empty. If it's
+              not needed, you can remove it to improve readability.
+            </p>
+            <pre
+              data-id="code-animation"
+            ><code class="hljs javascript" data-trim data-line-numbers="|4,8-11|17|22-24"><script type="text/template">					
+						for (kontrol = 2; kontrol <= input; kontrol++)
+						{
+							prime = 1;
+							for (counter = 2; counter < kontrol; counter++)
+							{
+								if (kontrol % counter == 0)
+								{
+									prime = 0;
+								}
+							}
+							if (prime == 0)
+							{
+								//empty block
+							}
+							else
+							{
+								
+								mycounter++;
+								series[mycounter] = kontrol;
+							}
+						}
+					</script></code></pre>
+            <a href="#/3/3" class="navigate-down"></a>
+          </section>
+          <section>
+            <h3 style="color:springgreen;">Array Usage</h3>
+			<p>
+				Instead of using a fixed-size array, consider using a dynamic data structure like List to store prime numbers. This way, you won't have to worry about defining a maximum size, and the code will be more flexible.
+			</p>
 
-		<script src="dist/reveal.js"></script>
-		<script src="plugin/notes/notes.js"></script>
-		<script src="plugin/markdown/markdown.js"></script>
-		<script src="plugin/highlight/highlight.js"></script>
-		<script>
-			// More info about initialization & config:
-			// - https://revealjs.com/initialization/
-			// - https://revealjs.com/config/
-			Reveal.initialize({
-				hash: true,
+			<h6 style="text-align: left;">Previous Code</h6>
+			<pre
+			data-id="code-animation"
+		  ><code class="hljs javascript" data-trim data-line-numbers="|4,8-11|17|22-24"><script type="text/template">					
+			long[] series = new long[99999];
+				  </script></code></pre>
+			<h6 style="text-align: left;">New Code</h6>
+			<pre
+			data-id="code-animation"
+		  ><code class="hljs javascript" data-trim data-line-numbers="|4,8-11|17|22-24"><script type="text/template">					
+			List<long> primeSeries = FindPrimes(userInput);
+				  </script></code></pre>
+          </section>
+        </section>
+		<!--  -->
+		<section>
+			<section>
+				<h1 style="color:orange;">Separation of Concerns</h1>
+				<p>
+					Conside breaking down the logic into smaller functions to improve
+					readability and maintainability.
+				</p>
+				<a href="#/4/1" class="navigate-down"></a>
+			</section>
+			<section>
+				<h6 style="color:springgreen;">
+					1) IsPrime function
+				</h6>
+				<pre data-id="code-animation"><code class="hljs javascript" data-trim data-line-numbers>
+					static bool IsPrime(int number)
+					{
+						for (int divisor = 2; divisor < number; divisor++)
+						{
+							if (number % divisor == 0)
+							{
+								return false;
+							}
+						}
+				
+						return true;
+					}
+				</code></pre>
+				<a href="#/4/2" class="navigate-down"></a>
+			</section>
+			<section>
+				<h6 style="color:springgreen;">2) Find Primes function</h6>
+				<pre data-id="code-animation"><code class="hljs javascript" data-trim data-line-numbers>
+					static List<int> FindPrimes(int limit)
+						{
+							List<int> primeList = new List<int>();
+					
+							for (int candidate = 2; candidate <= limit; candidate++)
+							{
+								if (IsPrime(candidate))
+								{
+									primeList.Add(candidate);
+								}
+							}
+					
+							return primeList;
+						}
+				</code></pre>
+				<a href="#/4/3" class="navigate-down"></a>
+			</section>
+			<section>
+				<h6 style="color:springgreen;">3) Main </h6>
+				<pre data-id="code-animation"><code class="hljs javascript" data-trim data-line-numbers>
+					Console.WriteLine("Prime Number Programs");
+					Console.Write("Enter a number: ");
+					int userInput = Convert.ToInt32(Console.ReadLine());
+			
+					List<int> primeSeries = FindPrimes(userInput);
+			
+					foreach (int prime in primeSeries)
+					{
+						Console.WriteLine(prime);
+					}
+				</code></pre>
+			</section>
+		</section>
+		<section>
+			<section>
 
-				// Learn about plugins: https://revealjs.com/plugins/
-				plugins: [ RevealMarkdown, RevealHighlight, RevealNotes ]
-			});
-		</script>
-	</body>
+				<h2 style="color:orange;">After Refactoring</h2>
+				<h6 style="color:springgreen;">Key improvements:</h6>
+				<ul>
+					<li>Descriptive Naming</li>
+					<li>Dynamic Data tructure</li>
+					<li>Separated Concerns</li>
+					<li>Improved Readability</li>
+				</ul>
+				<a href="#/5/1" class="navigate-down"></a>
+			</section>
+			<section>
+				<h1>Thank you!</h1>
+				<p>If you have any questions or comments, feel free to ask.</p>
+				<p>Slides powered by <a href="https://revealjs.com/installation/">reveal.js</a></p>
+				<p style="text-align: right; font-size: 20px;">Ramazan Alkoyun</p>
+			</section>
+		</section>
+      </div>
+    </div>
+
+    <script src="dist/reveal.js"></script>
+    <script src="plugin/zoom/zoom.js"></script>
+    <script src="plugin/notes/notes.js"></script>
+    <script src="plugin/search/search.js"></script>
+    <script src="plugin/markdown/markdown.js"></script>
+    <script src="plugin/highlight/highlight.js"></script>
+    <script>
+      // More info about initialization & config:
+      // - https://revealjs.com/initialization/
+      // - https://revealjs.com/config/
+      Reveal.initialize({
+        controls: true,
+        progress: true,
+        center: true,
+        hash: true,
+
+        // Learn about plugins: https://revealjs.com/plugins/
+        plugins: [
+          RevealZoom,
+          RevealNotes,
+          RevealSearch,
+          RevealMarkdown,
+          RevealHighlight,
+        ],
+      });
+    </script>
+  </body>
 </html>
